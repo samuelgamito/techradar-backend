@@ -1,11 +1,11 @@
 package repository
 
 import (
-	"backend/internal/config"
-	"backend/internal/domain"
 	"github.com/scylladb/gocqlx/v2"
 	"github.com/scylladb/gocqlx/v2/qb"
 	"sort"
+	"techradar-backend/internal/config"
+	"techradar-backend/internal/domain"
 )
 
 type InfoRepository struct {

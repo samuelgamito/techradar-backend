@@ -1,10 +1,10 @@
 package bootstrap
 
 import (
-	"backend/internal/handler"
 	"context"
 	"fmt"
 	"go.uber.org/fx"
+	"techradar-backend/internal/handler"
 )
 
 func RegisterHooks(lifecycle fx.Lifecycle, h *handler.Handler) {

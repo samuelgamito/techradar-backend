@@ -1,11 +1,11 @@
 package usecase
 
 import (
-	"backend/internal/domain"
-	"backend/internal/handler/dto"
 	"fmt"
 	"log"
 	"strconv"
+	"techradar-backend/internal/domain"
+	"techradar-backend/internal/handler/dto"
 )
 
 type FindTechnologyUseCase struct {

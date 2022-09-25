@@ -1,7 +1,7 @@
 package usecase
 
 import (
-	"backend/internal/domain"
+	"techradar-backend/internal/domain"
 )
 
 type (

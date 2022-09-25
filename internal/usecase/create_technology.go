@@ -1,9 +1,9 @@
 package usecase
 
 import (
-	"backend/internal/domain"
-	"backend/internal/handler/dto"
 	"fmt"
+	"techradar-backend/internal/domain"
+	"techradar-backend/internal/handler/dto"
 )
 
 type CreateTechnologyUseCase struct {

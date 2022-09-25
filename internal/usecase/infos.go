@@ -1,10 +1,10 @@
 package usecase
 
 import (
-	"backend/internal/domain"
-	"backend/internal/handler/dto"
 	"log"
 	"sort"
+	"techradar-backend/internal/domain"
+	"techradar-backend/internal/handler/dto"
 )
 
 type InfosUseCase struct {

@@ -1,9 +1,9 @@
 package modules
 
 import (
-	"backend/internal/handler"
-	"backend/internal/usecase"
 	"go.uber.org/fx"
+	"techradar-backend/internal/handler"
+	"techradar-backend/internal/usecase"
 )
 
 var (

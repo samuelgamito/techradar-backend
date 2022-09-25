@@ -1,9 +1,9 @@
 package handler
 
 import (
-	"backend/internal/handler/dto"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/fx"
+	"techradar-backend/internal/handler/dto"
 )
 
 type InfosHandler struct {

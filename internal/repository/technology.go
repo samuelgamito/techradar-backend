@@ -1,11 +1,11 @@
 package repository
 
 import (
-	"backend/internal/config"
-	"backend/internal/domain"
-	"backend/internal/misc"
 	"github.com/scylladb/gocqlx/v2"
 	"github.com/scylladb/gocqlx/v2/qb"
+	"techradar-backend/internal/config"
+	"techradar-backend/internal/domain"
+	"techradar-backend/internal/misc"
 )
 
 type TechnologyRepository struct {

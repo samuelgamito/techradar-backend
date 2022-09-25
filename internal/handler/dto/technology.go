@@ -1,9 +1,9 @@
 package dto
 
 import (
-	"backend/internal/domain"
-	"backend/internal/misc"
 	"github.com/go-playground/validator/v10"
+	"techradar-backend/internal/domain"
+	"techradar-backend/internal/misc"
 	"time"
 )
 

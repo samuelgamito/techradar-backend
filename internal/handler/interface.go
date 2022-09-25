@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"backend/internal/domain"
-	"backend/internal/handler/dto"
+	"techradar-backend/internal/domain"
+	"techradar-backend/internal/handler/dto"
 )
 
 type CreateTechnologyUseCase interface {

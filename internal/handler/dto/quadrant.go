@@ -1,6 +1,6 @@
 package dto
 
-import "backend/internal/domain"
+import "techradar-backend/internal/domain"
 
 type Quadrant struct {
 	Id    int    `json:"id"`

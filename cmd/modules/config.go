@@ -1,8 +1,8 @@
 package modules
 
 import (
-	"backend/internal/config"
 	"go.uber.org/fx"
+	"techradar-backend/internal/config"
 )
 
 var (

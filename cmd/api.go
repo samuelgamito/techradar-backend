@@ -1,18 +1,18 @@
 package main
 
 import (
-	modules2 "backend/cmd/modules"
-	"backend/internal/bootstrap"
 	"go.uber.org/fx"
+	"techradar-backend/cmd/modules"
+	"techradar-backend/internal/bootstrap"
 )
 
 func main() {
 	fx.New(
 		fx.Options(
-			modules2.UseCase,
-			modules2.HandlersModule,
-			modules2.ConfigModule,
-			modules2.RepositoryModule,
+			modules.UseCase,
+			modules.HandlersModule,
+			modules.ConfigModule,
+			modules.RepositoryModule,
 			fx.Invoke(
 				bootstrap.RegisterHooks,
 			),

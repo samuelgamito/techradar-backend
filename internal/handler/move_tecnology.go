@@ -1,10 +1,10 @@
 package handler
 
 import (
-	"backend/internal/handler/dto"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"go.uber.org/fx"
+	"techradar-backend/internal/handler/dto"
 )
 
 func registerMoveTechnologyRoutes(handler *Handler) {
