@@ -31,8 +31,12 @@ properties:
     type: boolean
     description: Identify if the technology is active
   moved:
-    type: boolean
-    description: Identify if the last movement changed the score
+    type: integer
+    description: > 
+    Identify if the last movement changed the score <br>
+    1. Move forward
+    0. Don't moved
+    -1. Move backwards
   history:
     type: array
     nullable: true
