@@ -54,7 +54,7 @@ func (f *FindTechnologyUseCase) GetTechnologyByTeamAndQuadrants(team string, qua
 	return res, validateArrayContent(res, team, strconv.Itoa(quadrant))
 }
 
-func (f *FindTechnologyUseCase) GetTechnologyByTeamAndTitle(team string, friendlyTitle string) ([]domain.TechnologyDomain, *dto.ErrorResponse) {
+func (f *FindTechnologyUseCase) GetTechnologyByTeamAndTitle(team string, friendlyTitle string) (*domain.TechnologyDomain, *dto.ErrorResponse) {
 	res, err := f.repository.GetTechnologyByTeamAndTitle(team, friendlyTitle)
 
 	if err != nil {
@@ -62,5 +62,15 @@ func (f *FindTechnologyUseCase) GetTechnologyByTeamAndTitle(team string, friendl
 		return nil, dto.DefaultError()
 	}
 
-	return res, validateArrayContent(res, team)
+	if res == nil {
+		return nil, &dto.ErrorResponse{
+			StatusCode: 404,
+			Body: dto.ErrorBodyDTO{
+				Messages: []string{fmt.Sprintf("Resources not found to team %s title %s", team, friendlyTitle)},
+			},
+		}
+	}
+
+	techObj := res[0]
+	return &techObj, validateArrayContent(res, team)
 }

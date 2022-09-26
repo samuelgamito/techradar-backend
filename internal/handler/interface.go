@@ -12,7 +12,7 @@ type UpsertTechnologyUseCase interface {
 }
 
 type FindTechnologyUseCase interface {
-	GetTechnologyByTeamAndTitle(name string, title string) ([]domain.TechnologyDomain, *dto.ErrorResponse)
+	GetTechnologyByTeamAndTitle(name string, title string) (*domain.TechnologyDomain, *dto.ErrorResponse)
 	GetTechnologyByTeamAndQuadrants(team string, quadrant int) ([]domain.TechnologyDomain, *dto.ErrorResponse)
 	GetTechnologyByTeam(team string) ([]domain.TechnologyDomain, *dto.ErrorResponse)
 }
