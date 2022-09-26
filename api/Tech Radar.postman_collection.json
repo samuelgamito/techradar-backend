@@ -1,0 +1,273 @@
+{
+	"info": {
+		"_postman_id": "26605d1e-0ede-4916-8aea-d4e43449fde0",
+		"name": "Tech Radar",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21378590"
+	},
+	"item": [
+		{
+			"name": "Technlogy",
+			"item": [
+				{
+					"name": "Create Technology",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"team\": \"Github\",\n    \"title\": \"Four-key metrics\",\n    \"quadrant\": 0,\n    \"score\": 1,\n    \"description\": \"To measure software delivery performance, more and more organizations are adopting four key metrics as interpreted by the DORA research program: lead time, deployment frequency, mean time to restore (MTTR) and improvement failure enhancement. Its statistical analysis shows a clear delivery and search among high performers that provides a great indicator of performance for the same time, or even an entire organization.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/technologies",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"technologies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Technlogy By Team",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/team/:team/technologies",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"team",
+								":team",
+								"technologies"
+							],
+							"variable": [
+								{
+									"key": "team",
+									"value": "Github"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Technology By Team And Quadrant",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/team/:team/quadrants/:quadrant/technologies",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"team",
+								":team",
+								"quadrants",
+								":quadrant",
+								"technologies"
+							],
+							"variable": [
+								{
+									"key": "team",
+									"value": "Github"
+								},
+								{
+									"key": "quadrant",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Technology by Team and Title",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/team/:team/technologies/:technology_friendly_title",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"team",
+								":team",
+								"technologies",
+								":technology_friendly_title"
+							],
+							"variable": [
+								{
+									"key": "team",
+									"value": "Github"
+								},
+								{
+									"key": "technology_friendly_title",
+									"value": "four-key-metrics"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Move Technlogy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"score\": 2,\n    \"comments\": \"Moved after some tests\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/team/:team/technologies/:technology_friendly_title",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"team",
+								":team",
+								"technologies",
+								":technology_friendly_title"
+							],
+							"variable": [
+								{
+									"key": "team",
+									"value": "Github"
+								},
+								{
+									"key": "technology_friendly_title",
+									"value": "four-key-metrics"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Technology",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"Update technlogy description here\",\n    \"quadrant\": 3,\n    \"active\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/team/:team/technologies/:technology_friendly_title",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"team",
+								":team",
+								"technologies",
+								":technology_friendly_title"
+							],
+							"variable": [
+								{
+									"key": "team",
+									"value": "Github"
+								},
+								{
+									"key": "technology_friendly_title",
+									"value": "four-key-metrics"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Info",
+			"item": [
+				{
+					"name": "Create Quadrant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 0,\n    \"title\": \"Programming Language\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/infos/quadrants",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"infos",
+								"quadrants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Quadrants",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/infos/quadrants",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"infos",
+								"quadrants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Team With Technlogy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/infos/team",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"infos",
+								"team"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
