@@ -35,14 +35,13 @@ type (
 		Quadrant    *int   `json:"quadrant" validate:"required,min=0"`
 	}
 	MoveTechnologyDTO struct {
-		Score    int    `json:"score"`
-		Comments string `json:"comments"`
+		Score    *int    `json:"score"`
+		Comments *string `json:"comments"`
 	}
 	UpdateTechnologyDTO struct {
-		Title       string `json:"title"`
-		Description string `json:"description"`
-		Quadrant    int    `json:"quadrant"`
-		Active      bool   `json:"active"`
+		Description *string `json:"description"`
+		Quadrant    *int    `json:"quadrant" validate:"min=0"`
+		Active      *bool   `json:"active"`
 	}
 )
 
@@ -52,7 +51,6 @@ func (m *ErrorResponse) ErrorMessage() *ErrorResponse {
 
 func (cr *CreateTechnologyDTO) ToDomain() *domain.TechnologyDomain {
 	friendlyName := misc.GetFriendlyName(cr.Title)
-	now := time.Now()
 	tech := domain.TechnologyDomain{
 		Title:         cr.Title,
 		FriendlyTitle: friendlyName,
@@ -62,16 +60,66 @@ func (cr *CreateTechnologyDTO) ToDomain() *domain.TechnologyDomain {
 		Score:         *cr.Score,
 		Moved:         0,
 		Active:        true,
-		CreatedAt:     now,
-		UpdatedAt:     now,
 	}
 
 	return &tech
 }
 
+func (up *UpdateTechnologyDTO) ToDomain() *domain.UpdateTechnologyDomain {
+	tech := domain.UpdateTechnologyDomain{
+		Description: up.Description,
+		Quadrant:    up.Quadrant,
+		Active:      up.Active,
+	}
+
+	return &tech
+}
+
+func (up *UpdateTechnologyDTO) IsValid() *ErrorResponse {
+
+	if (UpdateTechnologyDTO{}) == *up {
+		return &ErrorResponse{
+			StatusCode: 400,
+			Body: ErrorBodyDTO{
+				Messages: []string{"Add at least one field to update"},
+			},
+		}
+	}
+
+	return validate(up)
+}
+
+func (mv *MoveTechnologyDTO) ToDomain() *domain.MoveTechnologyDomain {
+	tech := domain.MoveTechnologyDomain{
+		Comments: mv.Comments,
+		Score:    mv.Score,
+	}
+
+	return &tech
+}
+
+func (mv *MoveTechnologyDTO) IsValid() *ErrorResponse {
+
+	if (MoveTechnologyDTO{}) == *mv {
+		return &ErrorResponse{
+			StatusCode: 400,
+			Body: ErrorBodyDTO{
+				Messages: []string{"Add at least one field before move"},
+			},
+		}
+	}
+
+	return nil
+}
+
 func (cr *CreateTechnologyDTO) IsValid() *ErrorResponse {
+	return validate(cr)
+}
+
+func validate(body interface{}) *ErrorResponse {
+
 	v := validator.New()
-	err := v.Struct(cr)
+	err := v.Struct(body)
 
 	if err == nil {
 		return nil

@@ -2,28 +2,47 @@ package handler
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/google/uuid"
 	"go.uber.org/fx"
 	"techradar-backend/internal/handler/dto"
 )
 
-func registerMoveTechnologyRoutes(handler *Handler) {
-	handler.Gin.POST("/technologies/:id", func(context *gin.Context) {
-		moveRequest := dto.MoveTechnologyDTO{}
+type MoveTechnology struct {
+	useCase UpsertTechnologyUseCase
+}
 
-		if err := context.BindJSON(&moveRequest); err != nil {
-			context.AbortWithStatus(400)
-			return
-		}
+func NewMoveTechnology(service UpsertTechnologyUseCase) MoveTechnology {
+	return MoveTechnology{
+		useCase: service,
+	}
+}
 
-		var tech dto.TechnologyDTO
-		tech.Active = true
-		tech.ID = uuid.New().String()
-		tech.Moved = 0
-		tech.Score = moveRequest.Score
+func registerMoveTechnologyRoutes(mv MoveTechnology, handler *Handler) {
+	handler.Gin.POST("/team/:team/technologies/:technology_friendly_title", mv.moveTechnologyController)
+}
 
-		context.JSON(200, tech)
-	})
+func (mv *MoveTechnology) moveTechnologyController(context *gin.Context) {
+
+	team := context.Param("team")
+	technologyFriendlyTitle := context.Param("technology_friendly_title")
+
+	moveRequest := dto.MoveTechnologyDTO{}
+
+	if err := context.BindJSON(&moveRequest); err != nil {
+		context.AbortWithStatus(400)
+		return
+	}
+
+	if err := moveRequest.IsValid(); err != nil {
+		context.AbortWithStatusJSON(err.StatusCode, err.Body)
+		return
+	}
+
+	if err := mv.useCase.MoveTechnology(team, technologyFriendlyTitle, moveRequest.ToDomain()); err != nil {
+		context.AbortWithStatusJSON(err.StatusCode, err.Body)
+		return
+	}
+
+	context.Status(204)
 }
 
 var ModuleMoveTechnology = fx.Options(fx.Invoke(registerMoveTechnologyRoutes))

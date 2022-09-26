@@ -6,6 +6,7 @@ import (
 	"techradar-backend/internal/config"
 	"techradar-backend/internal/domain"
 	"techradar-backend/internal/misc"
+	"time"
 )
 
 type TechnologyRepository struct {
@@ -54,6 +55,21 @@ func (t *TechnologyRepository) GetTechnologyByTeam(team string) ([]domain.Techno
 }
 
 func (t *TechnologyRepository) CreateTechnology(tech *domain.TechnologyDomain) error {
+
+	now := time.Now()
+	tech.UpdatedAt = now
+	tech.CreatedAt = now
+
+	q := t.dbSession.Query(config.TechnologyTable.Insert()).BindStruct(tech)
+
+	return q.ExecRelease()
+}
+
+func (t *TechnologyRepository) UpdateTechnology(tech *domain.TechnologyDomain) error {
+
+	now := time.Now()
+	tech.UpdatedAt = now
+
 	q := t.dbSession.Query(config.TechnologyTable.Insert()).BindStruct(tech)
 
 	return q.ExecRelease()

@@ -1,6 +1,6 @@
 package domain
 
 type Quadrant struct {
-	Id    int
-	Title string
+	Id    int    `cql:"id"`
+	Title string `cql:"title"`
 }

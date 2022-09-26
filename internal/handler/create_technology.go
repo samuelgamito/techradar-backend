@@ -7,10 +7,10 @@ import (
 )
 
 type CreateTechnology struct {
-	useCase CreateTechnologyUseCase
+	useCase UpsertTechnologyUseCase
 }
 
-func NewCreateResource(service CreateTechnologyUseCase) CreateTechnology {
+func NewCreateResource(service UpsertTechnologyUseCase) CreateTechnology {
 	return CreateTechnology{
 		useCase: service,
 	}
@@ -33,7 +33,7 @@ func (c *CreateTechnology) createTechnologyController(context *gin.Context) {
 	}
 
 	resource := createRequest.ToDomain()
-	_, err := c.useCase.CreateTechnology(resource)
+	err := c.useCase.CreateTechnology(resource)
 	if err != nil {
 		context.AbortWithStatusJSON(err.StatusCode, err.Body)
 		return

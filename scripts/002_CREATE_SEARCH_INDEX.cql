@@ -1,0 +1,1 @@
+CREATE INDEX SearchByTeam ON tech_radar.technology(quadrant);

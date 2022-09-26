@@ -11,9 +11,11 @@ var (
 		handler.NewCreateResource,
 		handler.NewFindResource,
 		handler.NewInfosHandler,
+		handler.NewUpdateTechnology,
+		handler.NewMoveTechnology,
 		fx.Annotate(
-			usecase.NewCreateTechnology,
-			fx.As(new(handler.CreateTechnologyUseCase)),
+			usecase.NewUpsertTechnology,
+			fx.As(new(handler.UpsertTechnologyUseCase)),
 		),
 		fx.Annotate(
 			usecase.NewFindTechnology,

@@ -5,8 +5,10 @@ import (
 	"techradar-backend/internal/handler/dto"
 )
 
-type CreateTechnologyUseCase interface {
-	CreateTechnology(request *domain.TechnologyDomain) (string, *dto.ErrorResponse)
+type UpsertTechnologyUseCase interface {
+	CreateTechnology(request *domain.TechnologyDomain) *dto.ErrorResponse
+	UpdateTechnology(team string, friendlyTitle string, request *domain.UpdateTechnologyDomain) (*domain.TechnologyDomain, *dto.ErrorResponse)
+	MoveTechnology(team string, friendlyTitle string, request *domain.MoveTechnologyDomain) *dto.ErrorResponse
 }
 
 type FindTechnologyUseCase interface {

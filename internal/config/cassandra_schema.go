@@ -13,6 +13,7 @@ var technologyMetadata = table.Metadata{
 		"score",
 		"quadrant",
 		"active",
+		"history",
 		"created_at",
 		"updated_at",
 	},

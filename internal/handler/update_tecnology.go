@@ -2,31 +2,48 @@ package handler
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/google/uuid"
 	"go.uber.org/fx"
 	"techradar-backend/internal/handler/dto"
 )
 
-func registerUpdateTechnologyRoutes(handler *Handler) {
+type UpdateTechnology struct {
+	useCase UpsertTechnologyUseCase
+}
 
-	handler.Gin.PATCH("/technologies/:id", func(context *gin.Context) {
-		updateRequest := dto.UpdateTechnologyDTO{}
+func NewUpdateTechnology(useCase UpsertTechnologyUseCase) UpdateTechnology {
+	return UpdateTechnology{
+		useCase: useCase,
+	}
+}
 
-		if err := context.BindJSON(&updateRequest); err != nil {
-			context.AbortWithStatus(400)
-			return
-		}
+func registerUpdateTechnologyRoutes(u UpdateTechnology, handler *Handler) {
+	handler.Gin.PATCH("/team/:team/technologies/:technology_friendly_title", u.updateTechnologyController)
+}
 
-		var tech dto.TechnologyDTO
-		tech.Active = true
-		tech.ID = uuid.New().String()
-		tech.Moved = 0
-		tech.Quadrant = updateRequest.Quadrant
-		tech.Title = updateRequest.Title
-		tech.Description = updateRequest.Description
+func (u *UpdateTechnology) updateTechnologyController(context *gin.Context) {
+	updateRequest := dto.UpdateTechnologyDTO{}
 
-		context.JSON(200, tech)
-	})
+	team := context.Param("team")
+	technologyFriendlyTitle := context.Param("technology_friendly_title")
+
+	if err := context.BindJSON(&updateRequest); err != nil {
+		context.AbortWithStatus(400)
+		return
+	}
+
+	if err := updateRequest.IsValid(); err != nil {
+		context.AbortWithStatusJSON(err.StatusCode, err.Body)
+		return
+	}
+
+	res, err := u.useCase.UpdateTechnology(team, technologyFriendlyTitle, updateRequest.ToDomain())
+
+	if err != nil {
+		context.AbortWithStatusJSON(err.StatusCode, err.Body)
+		return
+	}
+
+	context.JSON(200, res)
 }
 
 var ModuleUpdateTechnology = fx.Options(fx.Invoke(registerUpdateTechnologyRoutes))
