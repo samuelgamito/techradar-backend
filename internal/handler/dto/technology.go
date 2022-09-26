@@ -15,7 +15,6 @@ type (
 		Comments      string    `json:"comments"`
 	}
 	TechnologyDTO struct {
-		ID          string                 `json:"id"`
 		Team        string                 `json:"Team"`
 		Title       string                 `json:"title"`
 		Description string                 `json:"description"`
