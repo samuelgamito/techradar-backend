@@ -3,6 +3,7 @@ package misc
 import (
 	"github.com/scylladb/gocqlx/v2/qb"
 	"techradar-backend/internal/domain"
+	"time"
 )
 
 func BuildWhereCondition(filter map[string]interface{}) []qb.Cmp {
@@ -34,7 +35,6 @@ func BuildUpdateObject(old *domain.TechnologyDomain, fields *domain.UpdateTechno
 func BuildHistoryObject(techObj *domain.TechnologyDomain, move *domain.MoveTechnologyDomain) {
 
 	newHistoryObj := domain.TechnologyHistoryDomain{}
-
 	if move.Score == nil {
 		newHistoryObj.Score = techObj.Score
 		newHistoryObj.PreviousScore = techObj.Score
@@ -50,5 +50,6 @@ func BuildHistoryObject(techObj *domain.TechnologyDomain, move *domain.MoveTechn
 		newHistoryObj.Comments = *move.Comments
 	}
 
+	newHistoryObj.AddedDate = time.Now()
 	techObj.History = append(techObj.History, newHistoryObj)
 }
