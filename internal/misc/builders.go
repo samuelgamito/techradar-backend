@@ -39,6 +39,15 @@ func BuildHistoryObject(techObj *domain.TechnologyDomain, move *domain.MoveTechn
 		newHistoryObj.Score = techObj.Score
 		newHistoryObj.PreviousScore = techObj.Score
 	} else {
+
+		if *move.Score > techObj.Score {
+			techObj.Moved = 1
+		} else if *move.Score < techObj.Score {
+			techObj.Moved = -1
+		} else {
+			techObj.Moved = 0
+		}
+
 		newHistoryObj.PreviousScore = techObj.Score
 		newHistoryObj.Score = *move.Score
 		techObj.Score = *move.Score
