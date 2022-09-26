@@ -37,6 +37,7 @@ func (t *TechnologyRepository) GetTechnologyByTeamAndQuadrants(team string, quad
 
 	filters["team"] = team
 	filters["quadrant"] = quadrant
+	filters["active"] = true
 
 	err := t.findTechnology(filters, &result)
 
@@ -48,6 +49,7 @@ func (t *TechnologyRepository) GetTechnologyByTeam(team string) ([]domain.Techno
 	var result []domain.TechnologyDomain
 
 	filters["team"] = team
+	filters["active"] = true
 
 	err := t.findTechnology(filters, &result)
 
