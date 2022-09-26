@@ -1,0 +1,11 @@
+type: object
+properties:
+  id:
+    type: number
+    description: Quadrant's id
+    example: 3
+    minimum: 0
+  title:
+    type: string
+    description: Quadrant title
+    example: "Framework and Languages"

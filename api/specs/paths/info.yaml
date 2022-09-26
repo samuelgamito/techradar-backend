@@ -1,0 +1,62 @@
+GetDistinctTeams:
+  tags:
+    - Info
+  summary: Get all teams
+  description: >
+    <strong>Given </strong> i call this endpoint<br>
+    <strong>I want to</strong> get all teams that has technology created <br>
+    <strong>So i could</strong> create a filter to that
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            description: Map all transitions and their values
+            items:
+              type: string
+    '500':
+      $ref: "../errors.yaml#/InternalServerError"
+
+CreateQuadrant:
+  tags:
+    - Info
+  summary: Create quadrant
+  description: >
+    <strong>Given </strong> i call this endpoint<br>
+    <strong>I want to</strong> create or update the quadrant <br>
+    <strong>So i could</strong> manage my quadrants
+  requestBody:
+    description: Expected data to create a quadrant
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: './../schemas/index.yaml#/CreateQuadrantRequest'
+  responses:
+    '204':
+      description: NO_CONTENT
+    '500':
+      $ref: "../errors.yaml#/InternalServerError"
+
+GetQuadrant:
+  tags:
+    - Info
+  summary: Get all quadrants
+  description: >
+    <strong>Given </strong> i call this endpoint<br>
+    <strong>I want to</strong> all quadrants and name <br>
+    <strong>So i could</strong> create the quadrants chart on frontend
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            description: Map all transitions and their values
+            items:
+              $ref: "../schemas/index.yaml#/QuadrantResponse"
+    '500':
+      $ref: "../errors.yaml#/InternalServerError"

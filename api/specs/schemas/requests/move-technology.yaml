@@ -1,0 +1,12 @@
+type: object
+properties:
+  comments:
+    type: string
+    description: Quadrant title
+    example: "Framework and Languages"
+  score:
+    type: integer
+    description: Technology score
+    example: 3
+    minimum: 0
+    maximum: 3

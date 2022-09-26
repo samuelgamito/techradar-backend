@@ -1,0 +1,14 @@
+type: object
+properties:
+  description:
+    type: string
+    description: Technology's description
+    example: "To measure software delivery performance, more and more organizations are adopting four key metrics as interpreted by the DORA research program: lead time, deployment frequency, mean time to restore (MTTR) and improvement failure enhancement. Its statistical analysis shows a clear delivery and search among high performers that provides a great indicator of performance for the same time, or even an entire organization."
+  quadrant:
+    type: integer
+    description: Quadrant number id where tech belongs
+    example: 1
+    minimum: 0
+  active:
+    type: boolean
+    description: Identify if the technology is active

@@ -1,0 +1,52 @@
+type: object
+properties:
+  team:
+    type: string
+    description: Team name
+    example: github
+  title:
+    type: string
+    description: Technology's title
+    example: Four-key metrics
+  friendlyTitle:
+    type: string
+    description: Technology's friendly title, this field is internally created replacing spaces with slashes and converting to lower case
+    example: four-key-metrics
+  description:
+    type: string
+    description: Technology's description
+    example: "To measure software delivery performance, more and more organizations are adopting four key metrics as interpreted by the DORA research program: lead time, deployment frequency, mean time to restore (MTTR) and improvement failure enhancement. Its statistical analysis shows a clear delivery and search among high performers that provides a great indicator of performance for the same time, or even an entire organization."
+  quadrant:
+    type: integer
+    description: Quadrant number id where tech belongs
+    example: 1
+    minimum: 0
+  score:
+    type: integer
+    description: Technology score
+    example: 3
+    minimum: 0
+    maximum: 3
+  active:
+    type: boolean
+    description: Identify if the technology is active
+  moved:
+    type: boolean
+    description: Identify if the last movement changed the score
+  history:
+    type: array
+    nullable: true
+    description: Map all transitions and their values
+    items:
+      $ref: './technology-history.yaml'
+  created_at:
+    type: string
+    description: Date when the resource was created
+    example: 2022-09-26T14:55:24.664Z
+  updated_at:
+    type: string
+    description: Date of last update
+    example: 2022-09-26T14:55:24.664Z
+
+
+

@@ -1,0 +1,7 @@
+description: Representation of a error
+type: object
+properties:
+  message:
+    description: a detail that further explains the error
+    type: string
+    example: "error message related with the code error"

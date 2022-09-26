@@ -1,0 +1,21 @@
+type: object
+properties:
+  comments:
+    type: string
+    description: Technology's title
+    example: "Moved after test in production"
+  score:
+    type: number
+    description: Technology score
+    example: 3
+    minimum: 0
+    maximum: 3
+  previous_score:
+    type: number
+    description: Technology score before update
+    example: 3
+    minimum: 0
+    maximum: 3
+  added_date:
+    type: string
+    description: ISO data containing the date when this transition was added

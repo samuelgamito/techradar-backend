@@ -1,0 +1,999 @@
+openapi: 3.0.3
+info:
+  title: Technology Radar
+  description: This is a training project aiming to create a Technology radar were each team could manage technologies and their maturity
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8080'
+components:
+  schemas:
+    TechnologyResponse:
+      type: object
+      properties:
+        team:
+          type: string
+          description: Team name
+          example: github
+        title:
+          type: string
+          description: Technology's title
+          example: Four-key metrics
+        friendlyTitle:
+          type: string
+          description: 'Technology''s friendly title, this field is internally created replacing spaces with slashes and converting to lower case'
+          example: four-key-metrics
+        description:
+          type: string
+          description: Technology's description
+          example: 'To measure software delivery performance, more and more organizations are adopting four key metrics as interpreted by the DORA research program: lead time, deployment frequency, mean time to restore (MTTR) and improvement failure enhancement. Its statistical analysis shows a clear delivery and search among high performers that provides a great indicator of performance for the same time, or even an entire organization.'
+        quadrant:
+          type: integer
+          description: Quadrant number id where tech belongs
+          example: 1
+          minimum: 0
+        score:
+          type: integer
+          description: Technology score
+          example: 3
+          minimum: 0
+          maximum: 3
+        active:
+          type: boolean
+          description: Identify if the technology is active
+        moved:
+          type: boolean
+          description: Identify if the last movement changed the score
+        history:
+          type: array
+          nullable: true
+          description: Map all transitions and their values
+          items:
+            type: object
+            properties:
+              comments:
+                type: string
+                description: Technology's title
+                example: Moved after test in production
+              score:
+                type: number
+                description: Technology score
+                example: 3
+                minimum: 0
+                maximum: 3
+              previous_score:
+                type: number
+                description: Technology score before update
+                example: 3
+                minimum: 0
+                maximum: 3
+              added_date:
+                type: string
+                description: ISO data containing the date when this transition was added
+        created_at:
+          type: string
+          description: Date when the resource was created
+          example: 2022-09-26T14:55:24.664Z
+        updated_at:
+          type: string
+          description: Date of last update
+          example: 2022-09-26T14:55:24.664Z
+    QuadrantResponse:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Quadrant's id
+          example: 3
+          minimum: 0
+        title:
+          type: string
+          description: Quadrant title
+          example: Framework and Languages
+    TechnologyRequest:
+      type: object
+      required:
+        - team
+        - title
+        - description
+        - quadrant
+        - score
+      properties:
+        team:
+          type: string
+          description: Team name
+          example: github
+        title:
+          type: string
+          description: Technology's title
+          example: Four-key metrics
+        description:
+          type: string
+          description: Technology's description
+          example: 'To measure software delivery performance, more and more organizations are adopting four key metrics as interpreted by the DORA research program: lead time, deployment frequency, mean time to restore (MTTR) and improvement failure enhancement. Its statistical analysis shows a clear delivery and search among high performers that provides a great indicator of performance for the same time, or even an entire organization.'
+        quadrant:
+          type: integer
+          description: Quadrant number id where tech belongs
+          example: 1
+          minimum: 0
+        score:
+          type: integer
+          description: Technology score
+          example: 3
+          minimum: 0
+          maximum: 3
+    MoveTechnologyRequest:
+      type: object
+      properties:
+        comments:
+          type: string
+          description: Quadrant title
+          example: Framework and Languages
+        score:
+          type: integer
+          description: Technology score
+          example: 3
+          minimum: 0
+          maximum: 3
+    UpdateTechnologyRequest:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Technology's description
+          example: 'To measure software delivery performance, more and more organizations are adopting four key metrics as interpreted by the DORA research program: lead time, deployment frequency, mean time to restore (MTTR) and improvement failure enhancement. Its statistical analysis shows a clear delivery and search among high performers that provides a great indicator of performance for the same time, or even an entire organization.'
+        quadrant:
+          type: integer
+          description: Quadrant number id where tech belongs
+          example: 1
+          minimum: 0
+        active:
+          type: boolean
+          description: Identify if the technology is active
+    CreateQuadrantRequest:
+      type: object
+      required:
+        - id
+        - title
+      properties:
+        id:
+          type: number
+          description: Quadrant's id
+          example: 3
+          minimum: 0
+        title:
+          type: string
+          description: Quadrant title
+          example: Framework and Languages
+paths:
+  /technologies:
+    post:
+      tags:
+        - Technologies
+      summary: Create technology
+      description: Create a new technology to specified team
+      requestBody:
+        description: Expected data to add a new technology
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - team
+                - title
+                - description
+                - quadrant
+                - score
+              properties:
+                team:
+                  type: string
+                  description: Team name
+                  example: github
+                title:
+                  type: string
+                  description: Technology's title
+                  example: Four-key metrics
+                description:
+                  type: string
+                  description: Technology's description
+                  example: 'To measure software delivery performance, more and more organizations are adopting four key metrics as interpreted by the DORA research program: lead time, deployment frequency, mean time to restore (MTTR) and improvement failure enhancement. Its statistical analysis shows a clear delivery and search among high performers that provides a great indicator of performance for the same time, or even an entire organization.'
+                quadrant:
+                  type: integer
+                  description: Quadrant number id where tech belongs
+                  example: 1
+                  minimum: 0
+                score:
+                  type: integer
+                  description: Technology score
+                  example: 3
+                  minimum: 0
+                  maximum: 3
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  team:
+                    type: string
+                    description: Team name
+                    example: github
+                  title:
+                    type: string
+                    description: Technology's title
+                    example: Four-key metrics
+                  friendlyTitle:
+                    type: string
+                    description: 'Technology''s friendly title, this field is internally created replacing spaces with slashes and converting to lower case'
+                    example: four-key-metrics
+                  description:
+                    type: string
+                    description: Technology's description
+                    example: 'To measure software delivery performance, more and more organizations are adopting four key metrics as interpreted by the DORA research program: lead time, deployment frequency, mean time to restore (MTTR) and improvement failure enhancement. Its statistical analysis shows a clear delivery and search among high performers that provides a great indicator of performance for the same time, or even an entire organization.'
+                  quadrant:
+                    type: integer
+                    description: Quadrant number id where tech belongs
+                    example: 1
+                    minimum: 0
+                  score:
+                    type: integer
+                    description: Technology score
+                    example: 3
+                    minimum: 0
+                    maximum: 3
+                  active:
+                    type: boolean
+                    description: Identify if the technology is active
+                  moved:
+                    type: boolean
+                    description: Identify if the last movement changed the score
+                  history:
+                    type: array
+                    nullable: true
+                    description: Map all transitions and their values
+                    items:
+                      type: object
+                      properties:
+                        comments:
+                          type: string
+                          description: Technology's title
+                          example: Moved after test in production
+                        score:
+                          type: number
+                          description: Technology score
+                          example: 3
+                          minimum: 0
+                          maximum: 3
+                        previous_score:
+                          type: number
+                          description: Technology score before update
+                          example: 3
+                          minimum: 0
+                          maximum: 3
+                        added_date:
+                          type: string
+                          description: ISO data containing the date when this transition was added
+                  created_at:
+                    type: string
+                    description: Date when the resource was created
+                    example: 2022-09-26T14:55:24.664Z
+                  updated_at:
+                    type: string
+                    description: Date of last update
+                    example: 2022-09-26T14:55:24.664Z
+        '400':
+          description: the request sent is not valid
+          content:
+            application/json:
+              schema:
+                description: Representation of a error
+                type: object
+                properties:
+                  message:
+                    description: a detail that further explains the error
+                    type: string
+                    example: error message related with the code error
+        '409':
+          description: The specified resource was already created
+          content:
+            application/json:
+              schema:
+                description: Representation of a error
+                type: object
+                properties:
+                  message:
+                    description: a detail that further explains the error
+                    type: string
+                    example: error message related with the code error
+        '500':
+          description: our application did not behave well
+          content:
+            application/json:
+              schema:
+                description: Representation of a error
+                type: object
+                properties:
+                  message:
+                    description: a detail that further explains the error
+                    type: string
+                    example: error message related with the code error
+  '/team/{team}/technologies':
+    get:
+      tags:
+        - Technologies
+      summary: Get all technologies by team
+      description: |
+        <strong>Given </strong> a team <br> <strong>I want to</strong> get all technologies <br> <strong>So i could</strong> create a technology radar from the given team
+      parameters:
+        - in: path
+          name: team
+          required: true
+          schema:
+            type: string
+          description: Team name
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Map all transitions and their values
+                items:
+                  type: object
+                  properties:
+                    team:
+                      type: string
+                      description: Team name
+                      example: github
+                    title:
+                      type: string
+                      description: Technology's title
+                      example: Four-key metrics
+                    friendlyTitle:
+                      type: string
+                      description: 'Technology''s friendly title, this field is internally created replacing spaces with slashes and converting to lower case'
+                      example: four-key-metrics
+                    description:
+                      type: string
+                      description: Technology's description
+                      example: 'To measure software delivery performance, more and more organizations are adopting four key metrics as interpreted by the DORA research program: lead time, deployment frequency, mean time to restore (MTTR) and improvement failure enhancement. Its statistical analysis shows a clear delivery and search among high performers that provides a great indicator of performance for the same time, or even an entire organization.'
+                    quadrant:
+                      type: integer
+                      description: Quadrant number id where tech belongs
+                      example: 1
+                      minimum: 0
+                    score:
+                      type: integer
+                      description: Technology score
+                      example: 3
+                      minimum: 0
+                      maximum: 3
+                    active:
+                      type: boolean
+                      description: Identify if the technology is active
+                    moved:
+                      type: boolean
+                      description: Identify if the last movement changed the score
+                    history:
+                      type: array
+                      nullable: true
+                      description: Map all transitions and their values
+                      items:
+                        type: object
+                        properties:
+                          comments:
+                            type: string
+                            description: Technology's title
+                            example: Moved after test in production
+                          score:
+                            type: number
+                            description: Technology score
+                            example: 3
+                            minimum: 0
+                            maximum: 3
+                          previous_score:
+                            type: number
+                            description: Technology score before update
+                            example: 3
+                            minimum: 0
+                            maximum: 3
+                          added_date:
+                            type: string
+                            description: ISO data containing the date when this transition was added
+                    created_at:
+                      type: string
+                      description: Date when the resource was created
+                      example: 2022-09-26T14:55:24.664Z
+                    updated_at:
+                      type: string
+                      description: Date of last update
+                      example: 2022-09-26T14:55:24.664Z
+        '404':
+          description: the resource required was not found
+          content:
+            application/json:
+              schema:
+                description: Representation of a error
+                type: object
+                properties:
+                  message:
+                    description: a detail that further explains the error
+                    type: string
+                    example: error message related with the code error
+        '500':
+          description: our application did not behave well
+          content:
+            application/json:
+              schema:
+                description: Representation of a error
+                type: object
+                properties:
+                  message:
+                    description: a detail that further explains the error
+                    type: string
+                    example: error message related with the code error
+  '/team/{team}/quadrants/{quadrant}/technologies':
+    get:
+      tags:
+        - Technologies
+      summary: Get all technologies by team and quadrant
+      description: |
+        <strong>Given </strong> a team and quadrant <br> <strong>I want to</strong> get all technologies <br> <strong>So i could</strong> create zoom in into specific quadrant
+      parameters:
+        - in: path
+          name: team
+          required: true
+          schema:
+            type: string
+          description: Team name
+        - in: path
+          name: quadrant
+          required: true
+          schema:
+            type: integer
+          description: Friendly title generated during the technology creation
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Map all transitions and their values
+                items:
+                  type: object
+                  properties:
+                    team:
+                      type: string
+                      description: Team name
+                      example: github
+                    title:
+                      type: string
+                      description: Technology's title
+                      example: Four-key metrics
+                    friendlyTitle:
+                      type: string
+                      description: 'Technology''s friendly title, this field is internally created replacing spaces with slashes and converting to lower case'
+                      example: four-key-metrics
+                    description:
+                      type: string
+                      description: Technology's description
+                      example: 'To measure software delivery performance, more and more organizations are adopting four key metrics as interpreted by the DORA research program: lead time, deployment frequency, mean time to restore (MTTR) and improvement failure enhancement. Its statistical analysis shows a clear delivery and search among high performers that provides a great indicator of performance for the same time, or even an entire organization.'
+                    quadrant:
+                      type: integer
+                      description: Quadrant number id where tech belongs
+                      example: 1
+                      minimum: 0
+                    score:
+                      type: integer
+                      description: Technology score
+                      example: 3
+                      minimum: 0
+                      maximum: 3
+                    active:
+                      type: boolean
+                      description: Identify if the technology is active
+                    moved:
+                      type: boolean
+                      description: Identify if the last movement changed the score
+                    history:
+                      type: array
+                      nullable: true
+                      description: Map all transitions and their values
+                      items:
+                        type: object
+                        properties:
+                          comments:
+                            type: string
+                            description: Technology's title
+                            example: Moved after test in production
+                          score:
+                            type: number
+                            description: Technology score
+                            example: 3
+                            minimum: 0
+                            maximum: 3
+                          previous_score:
+                            type: number
+                            description: Technology score before update
+                            example: 3
+                            minimum: 0
+                            maximum: 3
+                          added_date:
+                            type: string
+                            description: ISO data containing the date when this transition was added
+                    created_at:
+                      type: string
+                      description: Date when the resource was created
+                      example: 2022-09-26T14:55:24.664Z
+                    updated_at:
+                      type: string
+                      description: Date of last update
+                      example: 2022-09-26T14:55:24.664Z
+        '404':
+          description: the resource required was not found
+          content:
+            application/json:
+              schema:
+                description: Representation of a error
+                type: object
+                properties:
+                  message:
+                    description: a detail that further explains the error
+                    type: string
+                    example: error message related with the code error
+        '500':
+          description: our application did not behave well
+          content:
+            application/json:
+              schema:
+                description: Representation of a error
+                type: object
+                properties:
+                  message:
+                    description: a detail that further explains the error
+                    type: string
+                    example: error message related with the code error
+  '/team/{team}/technologies/{technology_friendly_title}':
+    get:
+      tags:
+        - Technologies
+      summary: Get a technology by team and title
+      description: |
+        <strong>Given </strong> a team and title<br> <strong>I want to</strong> get the related technologies <br> <strong>So i could</strong> display the details and all transitions
+      parameters:
+        - in: path
+          name: team
+          required: true
+          schema:
+            type: string
+          description: Team name
+        - in: path
+          name: technology_friendly_title
+          required: true
+          schema:
+            type: string
+          description: Friendly title generated during the technology creation
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  team:
+                    type: string
+                    description: Team name
+                    example: github
+                  title:
+                    type: string
+                    description: Technology's title
+                    example: Four-key metrics
+                  friendlyTitle:
+                    type: string
+                    description: 'Technology''s friendly title, this field is internally created replacing spaces with slashes and converting to lower case'
+                    example: four-key-metrics
+                  description:
+                    type: string
+                    description: Technology's description
+                    example: 'To measure software delivery performance, more and more organizations are adopting four key metrics as interpreted by the DORA research program: lead time, deployment frequency, mean time to restore (MTTR) and improvement failure enhancement. Its statistical analysis shows a clear delivery and search among high performers that provides a great indicator of performance for the same time, or even an entire organization.'
+                  quadrant:
+                    type: integer
+                    description: Quadrant number id where tech belongs
+                    example: 1
+                    minimum: 0
+                  score:
+                    type: integer
+                    description: Technology score
+                    example: 3
+                    minimum: 0
+                    maximum: 3
+                  active:
+                    type: boolean
+                    description: Identify if the technology is active
+                  moved:
+                    type: boolean
+                    description: Identify if the last movement changed the score
+                  history:
+                    type: array
+                    nullable: true
+                    description: Map all transitions and their values
+                    items:
+                      type: object
+                      properties:
+                        comments:
+                          type: string
+                          description: Technology's title
+                          example: Moved after test in production
+                        score:
+                          type: number
+                          description: Technology score
+                          example: 3
+                          minimum: 0
+                          maximum: 3
+                        previous_score:
+                          type: number
+                          description: Technology score before update
+                          example: 3
+                          minimum: 0
+                          maximum: 3
+                        added_date:
+                          type: string
+                          description: ISO data containing the date when this transition was added
+                  created_at:
+                    type: string
+                    description: Date when the resource was created
+                    example: 2022-09-26T14:55:24.664Z
+                  updated_at:
+                    type: string
+                    description: Date of last update
+                    example: 2022-09-26T14:55:24.664Z
+        '404':
+          description: the resource required was not found
+          content:
+            application/json:
+              schema:
+                description: Representation of a error
+                type: object
+                properties:
+                  message:
+                    description: a detail that further explains the error
+                    type: string
+                    example: error message related with the code error
+        '500':
+          description: our application did not behave well
+          content:
+            application/json:
+              schema:
+                description: Representation of a error
+                type: object
+                properties:
+                  message:
+                    description: a detail that further explains the error
+                    type: string
+                    example: error message related with the code error
+    patch:
+      tags:
+        - Technologies
+      summary: Update technology
+      description: |
+        <strong>Given </strong> a team and title<br> <strong>I want to</strong> update some fields <br> <strong>So i could</strong> correct or change some characteristics
+      parameters:
+        - in: path
+          name: team
+          required: true
+          schema:
+            type: string
+          description: Team name
+        - in: path
+          name: technology_friendly_title
+          required: true
+          schema:
+            type: string
+          description: Friendly title generated during the technology creation
+      requestBody:
+        description: Expected data to add a new technology
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                  description: Technology's description
+                  example: 'To measure software delivery performance, more and more organizations are adopting four key metrics as interpreted by the DORA research program: lead time, deployment frequency, mean time to restore (MTTR) and improvement failure enhancement. Its statistical analysis shows a clear delivery and search among high performers that provides a great indicator of performance for the same time, or even an entire organization.'
+                quadrant:
+                  type: integer
+                  description: Quadrant number id where tech belongs
+                  example: 1
+                  minimum: 0
+                active:
+                  type: boolean
+                  description: Identify if the technology is active
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  team:
+                    type: string
+                    description: Team name
+                    example: github
+                  title:
+                    type: string
+                    description: Technology's title
+                    example: Four-key metrics
+                  friendlyTitle:
+                    type: string
+                    description: 'Technology''s friendly title, this field is internally created replacing spaces with slashes and converting to lower case'
+                    example: four-key-metrics
+                  description:
+                    type: string
+                    description: Technology's description
+                    example: 'To measure software delivery performance, more and more organizations are adopting four key metrics as interpreted by the DORA research program: lead time, deployment frequency, mean time to restore (MTTR) and improvement failure enhancement. Its statistical analysis shows a clear delivery and search among high performers that provides a great indicator of performance for the same time, or even an entire organization.'
+                  quadrant:
+                    type: integer
+                    description: Quadrant number id where tech belongs
+                    example: 1
+                    minimum: 0
+                  score:
+                    type: integer
+                    description: Technology score
+                    example: 3
+                    minimum: 0
+                    maximum: 3
+                  active:
+                    type: boolean
+                    description: Identify if the technology is active
+                  moved:
+                    type: boolean
+                    description: Identify if the last movement changed the score
+                  history:
+                    type: array
+                    nullable: true
+                    description: Map all transitions and their values
+                    items:
+                      type: object
+                      properties:
+                        comments:
+                          type: string
+                          description: Technology's title
+                          example: Moved after test in production
+                        score:
+                          type: number
+                          description: Technology score
+                          example: 3
+                          minimum: 0
+                          maximum: 3
+                        previous_score:
+                          type: number
+                          description: Technology score before update
+                          example: 3
+                          minimum: 0
+                          maximum: 3
+                        added_date:
+                          type: string
+                          description: ISO data containing the date when this transition was added
+                  created_at:
+                    type: string
+                    description: Date when the resource was created
+                    example: 2022-09-26T14:55:24.664Z
+                  updated_at:
+                    type: string
+                    description: Date of last update
+                    example: 2022-09-26T14:55:24.664Z
+        '404':
+          description: the resource required was not found
+          content:
+            application/json:
+              schema:
+                description: Representation of a error
+                type: object
+                properties:
+                  message:
+                    description: a detail that further explains the error
+                    type: string
+                    example: error message related with the code error
+        '500':
+          description: our application did not behave well
+          content:
+            application/json:
+              schema:
+                description: Representation of a error
+                type: object
+                properties:
+                  message:
+                    description: a detail that further explains the error
+                    type: string
+                    example: error message related with the code error
+    post:
+      tags:
+        - Technologies
+      summary: Move technology
+      description: |
+        <strong>Given </strong> a team and title<br> <strong>I want to</strong> move the technology between ring <br> <strong>So i could</strong> evolve my technology radar
+      parameters:
+        - in: path
+          name: team
+          required: true
+          schema:
+            type: string
+          description: Team name
+        - in: path
+          name: technology_friendly_title
+          required: true
+          schema:
+            type: string
+          description: Friendly title generated during the technology creation
+      requestBody:
+        description: Expected data to add a new technology
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                comments:
+                  type: string
+                  description: Quadrant title
+                  example: Framework and Languages
+                score:
+                  type: integer
+                  description: Technology score
+                  example: 3
+                  minimum: 0
+                  maximum: 3
+      responses:
+        '204':
+          description: NO_CONTENT
+        '404':
+          description: the resource required was not found
+          content:
+            application/json:
+              schema:
+                description: Representation of a error
+                type: object
+                properties:
+                  message:
+                    description: a detail that further explains the error
+                    type: string
+                    example: error message related with the code error
+        '500':
+          description: our application did not behave well
+          content:
+            application/json:
+              schema:
+                description: Representation of a error
+                type: object
+                properties:
+                  message:
+                    description: a detail that further explains the error
+                    type: string
+                    example: error message related with the code error
+  /infos/team:
+    get:
+      tags:
+        - Info
+      summary: Get all quadrants
+      description: |
+        <strong>Given </strong> i call this endpoint<br> <strong>I want to</strong> all quadrants and name <br> <strong>So i could</strong> create the quadrants chart on frontend
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Map all transitions and their values
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      description: Quadrant's id
+                      example: 3
+                      minimum: 0
+                    title:
+                      type: string
+                      description: Quadrant title
+                      example: Framework and Languages
+        '500':
+          description: our application did not behave well
+          content:
+            application/json:
+              schema:
+                description: Representation of a error
+                type: object
+                properties:
+                  message:
+                    description: a detail that further explains the error
+                    type: string
+                    example: error message related with the code error
+  /infos/quadrants:
+    get:
+      tags:
+        - Info
+      summary: Get all quadrants
+      description: |
+        <strong>Given </strong> i call this endpoint<br> <strong>I want to</strong> all quadrants and name <br> <strong>So i could</strong> create the quadrants chart on frontend
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Map all transitions and their values
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      description: Quadrant's id
+                      example: 3
+                      minimum: 0
+                    title:
+                      type: string
+                      description: Quadrant title
+                      example: Framework and Languages
+        '500':
+          description: our application did not behave well
+          content:
+            application/json:
+              schema:
+                description: Representation of a error
+                type: object
+                properties:
+                  message:
+                    description: a detail that further explains the error
+                    type: string
+                    example: error message related with the code error
+    post:
+      tags:
+        - Info
+      summary: Create quadrant
+      description: |
+        <strong>Given </strong> i call this endpoint<br> <strong>I want to</strong> create or update the quadrant <br> <strong>So i could</strong> manage my quadrants
+      requestBody:
+        description: Expected data to create a quadrant
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - title
+              properties:
+                id:
+                  type: number
+                  description: Quadrant's id
+                  example: 3
+                  minimum: 0
+                title:
+                  type: string
+                  description: Quadrant title
+                  example: Framework and Languages
+      responses:
+        '204':
+          description: NO_CONTENT
+        '500':
+          description: our application did not behave well
+          content:
+            application/json:
+              schema:
+                description: Representation of a error
+                type: object
+                properties:
+                  message:
+                    description: a detail that further explains the error
+                    type: string
+                    example: error message related with the code error

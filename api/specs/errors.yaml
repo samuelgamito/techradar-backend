@@ -1,0 +1,27 @@
+BadRequestError:
+  description: the request sent is not valid
+  content:
+    application/json:
+      schema:
+        $ref: './schemas/error/errorBody.yaml'
+
+NotFoundError:
+  description: the resource required was not found
+  content:
+    application/json:
+      schema:
+        $ref: './schemas/error/errorBody.yaml'
+
+InternalServerError:
+  description: our application did not behave well
+  content:
+    application/json:
+      schema:
+        $ref: './schemas/error/errorBody.yaml'
+
+ConflictError:
+  description: The specified resource was already created
+  content:
+    application/json:
+      schema:
+        $ref: './schemas/error/errorBody.yaml'

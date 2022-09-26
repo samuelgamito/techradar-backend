@@ -1,0 +1,14 @@
+openapi: 3.0.3
+info:
+  title: Technology Radar
+  description: This is a training project aiming to create a Technology radar were each team could manage technologies and their maturity
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8080'
+
+components:
+  schemas:
+    $ref: "./schemas/index.yaml"
+  
+paths:
+  $ref: "./paths/index.yaml"

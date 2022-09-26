@@ -1,0 +1,200 @@
+CreateTechnology:
+  tags:
+    - Technologies
+  summary: Create technology
+  description: Create a new technology to specified team
+  requestBody:
+    description: Expected data to add a new technology
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/index.yaml#/TechnologyRequest'
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/index.yaml#/TechnologyResponse"
+    '400':
+      $ref: '../errors.yaml#/BadRequestError'
+    '500':
+      $ref: "../errors.yaml#/InternalServerError"
+    '409':
+      $ref: "../errors.yaml#/ConflictError"
+
+FindTechnologyByTeamController:
+  tags:
+    - Technologies
+  summary: Get all technologies by team
+  description: >
+    <strong>Given </strong> a team <br>
+    <strong>I want to</strong> get all technologies <br>
+    <strong>So i could</strong> create a technology radar from the given team
+  parameters:
+    - in: path
+      name: team
+      required: true
+      schema:
+        type: string
+      description: Team name
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            description: Map all transitions and their values
+            items:
+              $ref: "../schemas/index.yaml#/TechnologyResponse"
+    '404':
+      $ref: '../errors.yaml#/NotFoundError'
+    '500':
+      $ref: "../errors.yaml#/InternalServerError"
+
+FindTechnologyByTeamAndQuadrantController:
+  tags:
+    - Technologies
+  summary: Get all technologies by team and quadrant
+  description:  >
+    <strong>Given </strong> a team and quadrant <br>
+    <strong>I want to</strong> get all technologies <br>
+    <strong>So i could</strong> create zoom in into specific quadrant
+  parameters:
+    - in: path
+      name: team
+      required: true
+      schema:
+        type: string
+      description: Team name
+    - in: path
+      name: quadrant
+      required: true
+      schema:
+        type: integer
+      description: Friendly title generated during the technology creation
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            description: Map all transitions and their values
+            items:
+              $ref: "../schemas/index.yaml#/TechnologyResponse"
+    '404':
+      $ref: '../errors.yaml#/NotFoundError'
+    '500':
+      $ref: "../errors.yaml#/InternalServerError"
+
+FindTechnologyByTeamAndTitleController:
+  tags:
+    - Technologies
+  summary: Get a technology by team and title
+  description: >
+    <strong>Given </strong> a team and title<br>
+    <strong>I want to</strong> get the related technologies <br>
+    <strong>So i could</strong> display the details and all transitions
+  parameters:
+    - in: path
+      name: team
+      required: true
+      schema:
+        type: string
+      description: Team name
+    - in: path
+      name: technology_friendly_title
+      required: true
+      schema:
+        type: string
+      description: Friendly title generated during the technology creation
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/index.yaml#/TechnologyResponse"
+    '404':
+      $ref: '../errors.yaml#/NotFoundError'
+    '500':
+      $ref: "../errors.yaml#/InternalServerError"
+
+UpdateTechnology:
+  tags:
+    - Technologies
+  summary: Update technology
+  description:  >
+    <strong>Given </strong> a team and title<br>
+    <strong>I want to</strong> update some fields <br>
+    <strong>So i could</strong> correct or change some characteristics
+  parameters:
+    - in: path
+      name: team
+      required: true
+      schema:
+        type: string
+      description: Team name
+    - in: path
+      name: technology_friendly_title
+      required: true
+      schema:
+        type: string
+      description: Friendly title generated during the technology creation
+  requestBody:
+    description: Expected data to add a new technology
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: './../schemas/index.yaml#/UpdateTechnologyRequest'
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/index.yaml#/TechnologyResponse"
+    '404':
+      $ref: '../errors.yaml#/NotFoundError'
+    '500':
+      $ref: "../errors.yaml#/InternalServerError"
+
+MoveTechnology:
+  tags:
+    - Technologies
+  summary: Move technology
+  description: >
+    <strong>Given </strong> a team and title<br>
+    <strong>I want to</strong> move the technology between ring <br>
+    <strong>So i could</strong> evolve my technology radar
+  parameters:
+    - in: path
+      name: team
+      required: true
+      schema:
+        type: string
+      description: Team name
+    - in: path
+      name: technology_friendly_title
+      required: true
+      schema:
+        type: string
+      description: Friendly title generated during the technology creation
+  requestBody:
+    description: Expected data to add a new technology
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: './../schemas/index.yaml#/MoveTechnologyRequest'
+  responses:
+    '204':
+      description: NO_CONTENT
+    '404':
+      $ref: '../errors.yaml#/NotFoundError'
+    '500':
+      $ref: "../errors.yaml#/InternalServerError"

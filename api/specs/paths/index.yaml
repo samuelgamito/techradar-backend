@@ -1,0 +1,32 @@
+
+/technologies:
+  post:
+    $ref: "./technology.yaml#/CreateTechnology"
+
+/team/{team}/technologies:
+  get:
+    $ref: "./technology.yaml#/FindTechnologyByTeamController"
+
+/team/{team}/quadrants/{quadrant}/technologies:
+  get:
+    $ref: "./technology.yaml#/FindTechnologyByTeamAndQuadrantController"
+
+/team/{team}/technologies/{technology_friendly_title}:
+  get:
+    $ref: "./technology.yaml#/FindTechnologyByTeamAndTitleController"
+  patch:
+    $ref: "./technology.yaml#/UpdateTechnology"
+  post:
+    $ref: "./technology.yaml#/MoveTechnology"
+
+
+
+/infos/team:
+  get:
+    $ref: "./info.yaml#/GetQuadrant"
+
+/infos/quadrants:
+  get:
+    $ref: "./info.yaml#/GetQuadrant"
+  post:
+    $ref: "./info.yaml#/CreateQuadrant"

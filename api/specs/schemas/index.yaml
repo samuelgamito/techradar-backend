@@ -1,0 +1,20 @@
+
+TechnologyResponse:
+  $ref: "./responses/technology.yaml"
+QuadrantResponse:
+  $ref: "./responses/quadrants.yaml"
+
+
+
+TechnologyRequest:
+  $ref: "./requests/create-technology.yaml"
+
+MoveTechnologyRequest:
+  $ref: "./requests/move-technology.yaml"
+
+UpdateTechnologyRequest:
+  $ref: "./requests/update-technology.yaml"
+
+CreateQuadrantRequest:
+  $ref: "./requests/create-quadrant.yaml"
+
