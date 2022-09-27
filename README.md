@@ -24,7 +24,7 @@
   <p align="center">
     This is a backend project to manage companies technology radar.
     <br />
-    <a href="#"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/samuelgamito/techradar-backend/tree/main/api/specs"><strong>Explore api specs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/samuelgamito/techradar-backend/issues">Report Bug</a>
