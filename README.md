@@ -34,7 +34,13 @@
 </div>
 
 
+## Team
 
+> 
+| <a href="https://github.com/samuelgamito" target="_blank">**Samuel Gamito**</a> |
+| :---: |
+| [<img src="https://avatars2.githubusercontent.com/u/12644639?s=460&u=4a0475c4309b27a91bb87f3adb13745ea76a917e" width="250">](https://github.com/samuelgamito)  |
+| <a href="https://github.com/samuelgamito" target="_blank">`github.com/samuelgamito`</a> |
 
 
 
