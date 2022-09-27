@@ -5,7 +5,9 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=samuelgamito_techradar-backend&metric=coverage)](https://sonarcloud.io/summary/new_code?id=samuelgamito_techradar-backend)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=samuelgamito_techradar-backend&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=samuelgamito_techradar-backend)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=samuelgamito_techradar-backend&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=samuelgamito_techradar-backend)
-<br/><br/>
+
+<hr />
+
 [![LinkedIn][linkedin-shield]][linkedin-url]
 [![Issues][issues-shield]][issues-url]
 [![License][license-shield]][license-url]
