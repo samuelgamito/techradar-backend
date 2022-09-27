@@ -12,3 +12,8 @@ build-mocks:
 	mockery --dir=$(handler_path) --name=UpsertTechnologyUseCase --filename=upsert_technology.go --output=$(handler_path)/mocks --outpkg=mocks
 	mockery --dir=$(handler_path) --name=FindTechnologyUseCase --filename=find_technology.go --output=$(handler_path)/mocks --outpkg=mocks
 	mockery --dir=$(handler_path) --name=InfosUseCase --filename=infos.go --output=$(handler_path)/mocks --outpkg=mocks
+
+
+.PHONY: run-test-coverage
+run-test-coverage:
+	go test ./...  -coverprofile=coverage.out
