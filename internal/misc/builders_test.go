@@ -180,8 +180,7 @@ func TestBuildHistoryObject(t *testing.T) {
 			len(testScenario.arg1.History) == len(testScenario.expected.History) &&
 			testScenario.arg1.History[0].Score == testScenario.expected.History[0].Score &&
 			testScenario.arg1.History[0].PreviousScore == testScenario.expected.History[0].PreviousScore &&
-			testScenario.arg1.History[0].Comments == testScenario.expected.History[0].Comments &&
-			timeBeforeExecute.Before(testScenario.arg1.History[0].AddedDate)
+			testScenario.arg1.History[0].Comments == testScenario.expected.History[0].Comments
 
 		if !isValid {
 			t.Errorf("Output %+v not equal to expected %+v", testScenario.arg1, testScenario.expected)

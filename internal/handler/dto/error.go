@@ -46,6 +46,6 @@ func buildErrorMessage(e validator.FieldError) string {
 	case "required":
 		return fmt.Sprintf(missingRequiredFieldMessage, e.Field())
 	default:
-		return fmt.Sprintf(defaultErrorMessage, e.Field())
+		return fmt.Sprintf(defaultValidationErrorMessage, e.Field())
 	}
 }
