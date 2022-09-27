@@ -1,5 +1,11 @@
+<a name="readme-top"></a>
+
+
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=samuelgamito_techradar-backend&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=samuelgamito_techradar-backend)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=samuelgamito_techradar-backend&metric=coverage)](https://sonarcloud.io/summary/new_code?id=samuelgamito_techradar-backend)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=samuelgamito_techradar-backend&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=samuelgamito_techradar-backend)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=samuelgamito_techradar-backend&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=samuelgamito_techradar-backend)
+<br/><br/>
 [![LinkedIn][linkedin-shield]][linkedin-url]
 [![Issues][issues-shield]][issues-url]
 
@@ -23,3 +29,18 @@
     <a href="https://github.com/samuelgamito/techradar-backend/issues">Request Feature</a>
   </p>
 </div>
+
+
+
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[issues-url]: https://github.com/samuelgamito/techradar-backend/issues
+[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
+[license-url]: https://github.com/samuelgamito/techradar-backend/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
+[linkedin-url]: https://linkedin.com/in/samuel-gamito
+[product-screenshot]: images/screenshot.png
