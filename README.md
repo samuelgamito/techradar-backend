@@ -1,6 +1,6 @@
 <a name="readme-top"></a>
 
-
+![example workflow](https://github.com/samuelgamito/techradar-backend/actions/workflows/build.yml/badge.svg)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=samuelgamito_techradar-backend&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=samuelgamito_techradar-backend)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=samuelgamito_techradar-backend&metric=coverage)](https://sonarcloud.io/summary/new_code?id=samuelgamito_techradar-backend)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=samuelgamito_techradar-backend&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=samuelgamito_techradar-backend)
