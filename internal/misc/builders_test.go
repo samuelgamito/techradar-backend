@@ -5,7 +5,6 @@ import (
 	"reflect"
 	"techradar-backend/internal/domain"
 	"testing"
-	"time"
 )
 
 type (
@@ -170,8 +169,6 @@ func TestBuildUpdateObject(t *testing.T) {
 
 func TestBuildHistoryObject(t *testing.T) {
 	for _, testScenario := range buildHistoryObjectTestScenarios {
-
-		timeBeforeExecute := time.Now()
 
 		BuildHistoryObject(&testScenario.arg1, &testScenario.arg2)
 
