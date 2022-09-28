@@ -62,15 +62,10 @@ func (f *FindTechnologyUseCase) GetTechnologyByTeamAndTitle(team string, friendl
 		return nil, dto.DefaultError()
 	}
 
-	if res == nil {
-		return nil, &dto.ErrorResponse{
-			StatusCode: 404,
-			Body: dto.ErrorBodyDTO{
-				Messages: []string{fmt.Sprintf("Resources not found to team %s title %s", team, friendlyTitle)},
-			},
-		}
+	if err := validateArrayContent(res, team); err != nil {
+		return nil, err
 	}
 
 	techObj := res[0]
-	return &techObj, validateArrayContent(res, team)
+	return &techObj, nil
 }
