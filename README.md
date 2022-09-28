@@ -2,6 +2,7 @@
 
 ![example workflow](https://github.com/samuelgamito/techradar-backend/actions/workflows/build.yml/badge.svg)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=samuelgamito_techradar-backend&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=samuelgamito_techradar-backend)
+[![Known Vulnerabilities](https://snyk.io/test/github/samuelgamito/techradar-backend/badge.svg)]
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=samuelgamito_techradar-backend&metric=coverage)](https://sonarcloud.io/summary/new_code?id=samuelgamito_techradar-backend)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=samuelgamito_techradar-backend&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=samuelgamito_techradar-backend)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=samuelgamito_techradar-backend&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=samuelgamito_techradar-backend)
