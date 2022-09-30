@@ -67,14 +67,32 @@
 
 * [![Go][Golang]][Golang-url]
 * [![FX][Uberfx]][Uberfx-url]
-* [![Go][Mockery]][Mockery-url]
-
+* [![ApacheCassandra][Cassandra]][Cassandra-url]
 
 ## Getting Started
 
 ### Prerequisites
 
+This project was built using GoLang. To install and configure the program language, follow the instructs on:
+ [Golang Install](https://go.dev/doc/install)
+ 
+As database, this project use the NoSQL database Cassandra, all installation files and guide can be found on:
+[Cassandra Quickstart](https://cassandra.apache.org/_/quickstart.html)
+
 ### Installation
+
+All depedencies are stored on [go.mod](https://github.com/samuelgamito/techradar-backend/blob/main/go.sum) file. To install them, run the following command.
+
+```shell
+go mod download
+```
+
+After downloading the files, will be necessarie to run all .cql scripts located inside the folder:
+
+> scripts/database/
+
+Note: Run those scripts in order
+
 
 ## Usage
 
@@ -108,8 +126,8 @@
 <!-- BUILT WITH VARIABLES --> 
 [Golang]: https://img.shields.io/github/go-mod/go-version/samuelgamito/techradar-backend?style=for-the-badge
 [Golang-url]: https://go.dev/
-[Mockery]: https://img.shields.io/badge/mockery-000000?style=for-the-badge&logoColor=white
-[Mockery-url]: https://github.com/vektra/mockery
+[Cassandra]: https://img.shields.io/badge/cassandra-%231287B1.svg?style=for-the-badge&logo=apache-cassandra&logoColor=white
+[Cassandra-url]: [https://github.com/vektra/mockery](https://cassandra.apache.org/_/index.html)
 [Uberfx]: https://img.shields.io/badge/uber-go%20fx-ff0084?style=for-the-badge&logoColor=white&logo=unicorn
 [Uberfx-url]: https://github.com/uber-go/fx
 
